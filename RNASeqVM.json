@@ -1,0 +1,26 @@
+{
+  "builders": [
+    {
+      "communicator": "ssh",
+      "source_path": "bento/ubuntu-18.04",
+      "box_name": "kidsneuroscience/RNASeqVM",
+      "provider": "virtualbox",
+      "add_force": true,
+      "skip_add": true,
+      "type": "vagrant",
+      "template": "_Vagrantfile"
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "RNASeqVM_install_R_packages.R",
+      "destination": "/tmp/"
+    },
+    {
+      "type": "shell",
+      "script": "RNASeqVM_install_software.sh"
+    }
+  ]
+}
