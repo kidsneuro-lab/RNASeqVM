@@ -1,6 +1,10 @@
 print("Creating user libraries directory")
 dir.create(path = Sys.getenv("R_LIBS_USER"), showWarnings = FALSE, recursive = TRUE)
 
+print("Increase CPUs allocated compilation to 4")
+# Speed up compilation (hopefully). Source: https://www.r-bloggers.com/speeding-up-package-installation-3/
+options(Ncpus = 4)
+
 # Installing BiocManager
 print("Installing BiocManager")
 install.packages("BiocManager", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))
@@ -13,7 +17,7 @@ BiocManager::install("OUTRIDER", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))
 # Install FRASER
 print("Installing FRASER")
 install.packages('devtools', quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))
-devtools::install_github('gagneurlab/FRASER', dependencies=TRUE, quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))
+devtools::install_github('gagneurlab/FRASER', dependencies=TRUE, quiet=TRUE)
 
 # Install few other Bioconductor packages that may be handy
 print("Installing few other Bioconductor packages that may be handy")
