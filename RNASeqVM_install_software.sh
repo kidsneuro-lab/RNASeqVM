@@ -20,6 +20,10 @@ sudo apt-get install libxml2-dev -y -q
 echo 'options(repos=structure(c(CRAN="https://mirror.aarnet.edu.au/pub/CRAN/")))' > ~/.Rprofile
 
 # Installing R packages
+# Note: The R user library needs to be created first so that the subsequent script
+#       (which launches in a new R session) recognises the R user lib
+echo Creating R user libraries directory
+Rscript -e 'dir.create(path = Sys.getenv("R_LIBS_USER"), showWarnings = FALSE, recursive = TRUE)'
 Rscript /tmp/RNASeqVM_install_R_packages.R
 
 # Install RStudio server
